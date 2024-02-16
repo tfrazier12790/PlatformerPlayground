@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -11,13 +12,16 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private int expToLevel = 25;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private SpriteRenderer sr;
     [SerializeField] GameObject deathScreen;
     [SerializeField] private GameObject gameController;
+    [SerializeField] private bool invuln = false;
+    [SerializeField] private GameObject damageText;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         gameController = GameObject.FindWithTag("GameController");
@@ -47,8 +51,14 @@ public class PlayerScript : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        animator.SetTrigger("IsHit");
+        if (!invuln)
+        {
+            health -= damage;
+            animator.SetTrigger("IsHit");
+            GameObject damageNumber = Instantiate(damageText, new Vector2(transform.position.x, transform.position.y + 1.205f), transform.rotation);
+            damageNumber.GetComponentInChildren<TextMeshPro>().text = damage.ToString();
+            StartCoroutine(Invulnerable());
+        }
     }
     public int GetCurrentHealth()
     {
@@ -73,5 +83,25 @@ public class PlayerScript : MonoBehaviour
     public void AddExperience(int expToAdd)
     {
         experience += expToAdd;
+    }
+
+    private IEnumerator Invulnerable()
+    {
+        invuln = true;
+        yield return StartCoroutine(Blink());
+        invuln = false;
+    }
+
+    private IEnumerator Blink()
+    {
+        float startTime = Time.deltaTime;
+        for (int i = 6; i > 0; i--) 
+        { 
+            sr.enabled = false;
+            yield return new WaitForSeconds(.125f);
+            sr.enabled = true;
+            yield return new WaitForSeconds(.125f);
+        }
+        Debug.Log(Time.deltaTime - startTime);
     }
 }

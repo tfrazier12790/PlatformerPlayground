@@ -1338,8 +1338,11 @@ MonoBehaviour:
   expToLevel: 25
   animator: {fileID: 0}
   rb: {fileID: 0}
+  sr: {fileID: 0}
   deathScreen: {fileID: 1534879151}
   gameController: {fileID: 1054705958}
+  invuln: 0
+  damageText: {fileID: 5566356554598498448, guid: aacded3be86ce9549bb09eb6dfa971bc, type: 3}
 --- !u!1 &359673318
 GameObject:
   m_ObjectHideFlags: 0
@@ -2074,7 +2077,7 @@ MonoBehaviour:
   yOffset: 0
   player: {fileID: 0}
   lerpPos: {x: 0, y: 0, z: 0}
-  lerpSpeed: 0.01
+  lerpSpeed: 0.1
   lerpDistance: 1
   gameController: {fileID: 1054705958}
 --- !u!1001 &566728982
@@ -7325,7 +7328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6269821253150268512, guid: 75ed1e12bd04f8241a7f6f36a9999c60, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8204,7 +8207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6269821253150268512, guid: 75ed1e12bd04f8241a7f6f36a9999c60, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

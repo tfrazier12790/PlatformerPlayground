@@ -114,8 +114,7 @@ public class SkeletonScript : MonoBehaviour
         {
             int damage = Random.Range(1, 3);
             player.GetComponent<PlayerScript>().TakeDamage(damage);
-            GameObject damageNumber = Instantiate(damageText, new Vector2(player.transform.position.x, player.transform.position.y + 1.205f), transform.rotation);
-            damageNumber.GetComponentInChildren<TextMeshPro>().text = damage.ToString();
+
         }
     }
     private IEnumerator ResetTimer()
